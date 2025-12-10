@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Rewarded Ad Kinedom</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+    }
+
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      position: relative;
+      text-align: center;
+    }
+
+    main {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 28px; 
+      margin: 0;
+    }
+
+    p#status {
+      margin-top: 20px;
+      font-size: 22px;
+      color: #333;
+    }
+
+    button.showAd {
+      padding: 20px;
+      font-size: 26px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+      background-color: #00BFA6;
+      color: white;
+      margin-top: 20px;
+    }
+  </style>
+
+  <!-- SDK AdMob -->
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+
+  <script>
+    let rewardedAd;
+
+    function showAd() {
+      if (rewardedAd) {
+        rewardedAd.show();
+      } else {
+        alert("L'annonce n'est pas encore prête, veuillez patienter...");
+      }
+    }
+
+    function initRewardedAd() {
+      rewardedAd = new google.ads.rewarded.AdUnit({
+        adUnitId: 'ca-app-pub-2043204935911888/4454214897',
+        onAdLoaded: function() {
+          document.getElementById("status").innerText = "Ad Ready!";
+        },
+        onAdRewarded: function() {
+          document.getElementById("status").innerText = "Reward Granted!";
+          window.location.href = "https://monapp.adalo.com/kinedom?target=81ql8qs6tm6mr07lperphbili&params=%7B%225bji7iq00o746fi8uevn5gubo.t_57wv14brb9ur1ugeoh2qps0o5%22%3A23%7D";
+        }
+      });
+    }
+
+    window.onload = initRewardedAd;
+  </script>
+</head>
+
+<body>
+  <main>
+    <h1>Regardez l'annonce pour continuer</h1>
+    <p id="status">Cliquez sur Regarder</p>
+    <button class="showAd" onclick="showAd()">Regarder</button>
+  </main>
+</body>
+</html>
